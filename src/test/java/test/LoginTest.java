@@ -39,7 +39,7 @@ public class LoginTest {
     void shouldUnsuccessfulLogin() {
         var authInfo = DataHelper.generateUser();
         loginPage.validLogin(authInfo);
-        loginPage.verifyErrorNotification("Ошибка! \nеНеверно указан логин или пароль");
+        loginPage.verifyErrorNotification("Ошибка! \nеНеверно указаны логин или пароль");
     }
 
     @Test
