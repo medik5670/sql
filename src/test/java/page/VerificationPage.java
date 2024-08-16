@@ -3,6 +3,7 @@ package page;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 
+import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 
@@ -16,7 +17,7 @@ public class VerificationPage {
     }
 
     public void verifyErrorNotification(String expectedText) {
-        errorNotification.shouldHave(Condition.exactText(expectedText)).shouldBe(visible);
+        errorNotification.shouldHave(exactText(expectedText)).shouldBe(visible);
     }
 
     public DashboardPage validVerify(String verificationCode) {
@@ -29,3 +30,5 @@ public class VerificationPage {
         verifyButton.click();
     }
 }
+
+

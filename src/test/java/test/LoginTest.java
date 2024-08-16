@@ -27,29 +27,29 @@ public class LoginTest {
     @Test
     @DisplayName("Successful login")
     void shouldBeSuccessLogin() {
-        var authInfo = DataHelper.getCorrectUserLogInInfo();
-        var verificationPage = LoginPage.validLogin(authInfo);
+        var authInfo = DataHelper.getAuthInfoWithTestData();
+        var verificationPage = loginPage.validLogin(authInfo);
         verificationPage.verifyVerificationPageVisibility();
-        var verificationCode = SQLHelper.getVerificationCede();
+        var verificationCode = SQLHelper.getVerificationCode();
         verificationPage.validVerify(verificationCode);
     }
 
     @Test
     @DisplayName("Unsuccessful login")
     void shouldUnsuccessfulLogin() {
-        var authInfo = DataHelper.generateUser();
+        var authInfo = DataHelper.generateRandomUser();
         loginPage.validLogin(authInfo);
-        loginPage.verifyErrorNotification("Ошибка! \nеНеверно указаны логин или пароль");
+        loginPage.verifyErrorNotification("Ошибка! Неверно указаны логин или пароль");
     }
 
     @Test
     @DisplayName("Incorrect code")
     void shouldUnsuccessfulCode() {
-        var authInto = DataHelper.getCorrectUserLogInInfo();
+        var authInto = DataHelper.getAuthInfoWithTestData();
         var verificationPage = loginPage.validLogin(authInto);
         verificationPage.verifyVerificationPageVisibility();
         var verificationCode = DataHelper.generateRandomVerificationCode();
         verificationPage.verify(verificationCode.getCode());
-        verificationPage.verifyErrorNotification("Ошибка! \nНеверно указан код! Попробуйте еще раз.");
+        verificationPage.verifyErrorNotification("Ошибка! Неверно указан код! Попробуйте ещё раз.");
     }
 }

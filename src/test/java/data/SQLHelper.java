@@ -19,7 +19,7 @@ public class SQLHelper {
         return DriverManager.getConnection(System.getProperty("db.url"), "app", "pass");
     }
     @SneakyThrows
-    public static String getVerificationCede() {
+    public static String getVerificationCode() {
         var codeSQL = "SELECT code FROM auth_codes ORDER BY created DESC LIMIT 1";
         var conn = getConn();
         return QUERY_RUNNER.query(conn, codeSQL, new ScalarHandler<>());
@@ -32,7 +32,7 @@ public class SQLHelper {
         QUERY_RUNNER.execute(connection, "DELETE FROM card_transactions;");
         QUERY_RUNNER.execute(connection, "DELETE FROM auth_codes;");
         QUERY_RUNNER.execute(connection, "DELETE FROM users;");
-        }
+    }
 
     @SneakyThrows
     public static void cleanAuthCodes() {
@@ -41,3 +41,4 @@ public class SQLHelper {
     }
 
 }
+

@@ -13,29 +13,20 @@ public class DataHelper {
 
     private DataHelper() {
     }
-
-    public static String generateName() {
-        return faker.name().firstName();
+    public static AuthInfo getAuthInfoWithTestData() {
+        return new AuthInfo("vasya","qwerty123", "c690a106-a570-4aa6-a19d-bde280489511");
     }
-
-    public static String generatePassword() {
+    private static String generateRandomLogin() {
+        return faker.name().username();
+    }
+    private static String generatePassword() {
         return faker.internet().password();
     }
-
-    public static String generateId() {
+    private static String generateId(){
         return faker.internet().password();
     }
-
-    public static AuthInfo generateUser() {
-        return new AuthInfo(generateId(), generateName(), generatePassword());
-    }
-
-    public static AuthInfo generatePasswordForUser() {
-        return new AuthInfo("b101c113-875c-4b03-a988-8b554de4a642", "petya", generatePassword());
-    }
-
-    public static AuthInfo getCorrectUserLogInInfo() {
-        return new AuthInfo("c690a106-a570-4aa6-a19d-bde280489511", "vasya", "qwerty123");
+    public static AuthInfo generateRandomUser() {
+        return new AuthInfo(generateRandomLogin(), generatePassword(),generateId());
     }
 
     public static VerificationCode generateRandomVerificationCode() {
@@ -44,15 +35,17 @@ public class DataHelper {
 
     @Value
     public static class AuthInfo {
-        String id;
         String login;
         String password;
-    }
+        String id;
 
+    }
     @Data
     @NoArgsConstructor
     @AllArgsConstructor
     public static class VerificationCode {
         String code;
     }
+
+
 }
